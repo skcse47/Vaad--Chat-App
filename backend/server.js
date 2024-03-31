@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.routes.js"
 import messageRoutes from "./routes/message.routes.js"
+import getAllUsers from "./routes/user.routes.js"
 import connectToMongoDb from "../db/connectToMongoDb.js";
 
 const app = express();
@@ -16,8 +17,12 @@ dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('/', (req,res) => {
+    res.send("Home");
+})
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
+app.use("/api/user", getAllUsers);
 
 
 app.listen(5000, () => {
