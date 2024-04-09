@@ -42,6 +42,7 @@ export const signup = async (req, res) => {
                 _id: newuser._id,
                 fullname: newuser.fullname,
                 username: newuser.username,
+                gender: newuser.gender,
                 profilePic: newuser.profilePic
             });
         }else{
