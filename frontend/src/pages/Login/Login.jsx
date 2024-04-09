@@ -4,16 +4,20 @@ import useLogin from '../../hooks/useLogin'
 
 const Login = () => {
 
-	const [inputs, setInputs] = useState({
-		username: '',
-		password: '',
-	});
+	// const [inputs, setInputs] = useState({
+	// 	username: '',
+	// 	password: '',
+	// });
+
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+
 	const {loading, doLogin} = useLogin();
 
 	const handleSubmit = async(e) => {
 		e.preventDefault();
-		await doLogin(inputs);
-		console.log(inputs)
+		await doLogin({username, password});
+		console.log(username, password)
 
 	}
   return (
@@ -29,8 +33,10 @@ const Login = () => {
  							<span className='text-white label-text'>Username</span>
 					</label>
  						<input type='text' placeholder='Enter username' className='w-full input input-bordered h-10' 
-						value={inputs.username}
-						onChange={(e) => setInputs({...inputs, username: e.target.value})}
+						// value={inputs.username}
+						// onChange={(e) => setInputs({...inputs, username: e.target.value})}
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
 						/>
  					</div>
 
@@ -42,8 +48,10 @@ const Login = () => {
 							type='password'
 							placeholder='Enter Password'
 							className='w-full input input-bordered h-10'
-							value={inputs.password}
-							onChange={(e) => setInputs({...inputs, password: e.target.value})}
+							// value={inputs.password}
+							// onChange={(e) => setInputs({...inputs, password: e.target.value})}
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
 					<Link to={'/signup'} className='text-white text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
@@ -51,7 +59,15 @@ const Login = () => {
 					</Link>
 
 					<div>
-						<button className='btn btn-block btn-sm mt-2'>Login</button>
+						<button className='btn btn-block btn-sm mt-2'>
+						{
+							loading ? (
+								<span className='loading loading-spinner'></span>
+							) : (
+								"Login"
+							)
+						}	
+						</button>
 					</div>
 				</form>
       </div>
