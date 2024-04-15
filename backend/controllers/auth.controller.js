@@ -75,6 +75,7 @@ console.log(username)
             profilePic: user.profilePic
         });
     } catch (error) {
+        console.log("error in login controller");
         res.status(500).json({error: "Internal Server Error"});
     }
 };

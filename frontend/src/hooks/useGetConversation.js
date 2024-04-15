@@ -3,16 +3,14 @@ import toast from 'react-hot-toast';
 
 const useGetConversation = () => {
   const [loading, setLoading] = useState(false);
-  const [conversation, setConversation] = useState([]);
+  const [conversations, setConversation] = useState([]);
 
   useEffect(() => {
     const getConversation = async() =>{
       setLoading(true);
       try {
-
-        const res = await fetch("/api/users");
-        const data = res.json();
-
+        const res = await fetch('/api/user');
+        const data = await res.json();
         if(data.error){
           throw new Error(data.error);
         }
@@ -28,7 +26,7 @@ const useGetConversation = () => {
     getConversation();
   },[]);
 
-  return {loading, conversation};
+  return {loading, conversations};
 }
 
 export default useGetConversation;
