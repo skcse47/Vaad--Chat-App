@@ -1,6 +1,8 @@
+import useGetMessage from "../../hooks/useGetMessage";
 
 const Message = () => {
 
+	const {loading, messages} = useGetMessage();
 	return (
 		<div className={`chat chat-end`}>
 			<div className='chat-image avatar'>
