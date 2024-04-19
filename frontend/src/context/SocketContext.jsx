@@ -16,7 +16,7 @@ const {authUser} = useAuthContext();
 
 useEffect(() => {
     if(authUser){
-        const sockets = io("https://localhost:5000", {
+        const sockets = io("https://vaad-chat-app.onrender.com/", {
             query: {
                 userId: authUser._id,
             }
