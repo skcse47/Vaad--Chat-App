@@ -8,7 +8,7 @@ export default defineConfig({
     // port: 3000,
     proxy: {
       "/api": {
-        target: "http://localhost:5000",
+        target: "http://vaad-chat-app.netlify.app",
         // rewrite: (path) => path.replace(/^\/api/, ''), // Remove the "/api" prefix
       }
     }

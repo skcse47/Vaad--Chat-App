@@ -16,7 +16,7 @@ const {authUser} = useAuthContext();
 
 useEffect(() => {
     if(authUser){
-        const sockets = io("http://localhost:5000", {
+        const sockets = io("http://vaad-chat-app.netlify.app", {
             query: {
                 userId: authUser._id,
             }
