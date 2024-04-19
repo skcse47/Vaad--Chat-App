@@ -8,7 +8,7 @@ const server = http.createServer(app);
 // console.log("Www");return
 const io = new Server(server, {
     cors: {
-        origin: ["http://vaad-chat-app.netlify.app"],
+        origin: ["http://localhost:5173"],
         methods: ["GET", "POST"],
     }
 });

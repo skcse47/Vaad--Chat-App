@@ -8,7 +8,7 @@ export default defineConfig({
     // port: 3000,
     proxy: {
       "/api": {
-        target: "https://vaad-chat-app.onrender.com",
+        target: "http://localhost:5000",
         // rewrite: (path) => path.replace(/^\/api/, ''), // Remove the "/api" prefix
       }
     }
