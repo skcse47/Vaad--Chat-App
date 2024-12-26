@@ -15,7 +15,7 @@ const Conversations = ({searchQuery}) => {
 	// console.log(Conversation);return;
 	return (
 	
-		<div className='py-2 flex flex-col overflow-auto'>
+		<div className='py-2 flex flex-col overflow-auto w-full sm:w-[80%] mx-auto'>
 			<div className="p-3"></div>
 			{filteredConversations.length > 0 ?  filteredConversations.map((conver, idx) => (
 				<Conversation
