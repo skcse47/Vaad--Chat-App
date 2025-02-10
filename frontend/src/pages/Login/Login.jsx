@@ -59,7 +59,7 @@ const Login = () => {
 					</Link>
 
 					<div>
-						<button className='btn btn-block btn-sm mt-2'>
+						<button className='btn btn-block btn-sm mt-6'>
 						{
 							loading ? (
 								<span className='loading loading-spinner'></span>
@@ -70,6 +70,18 @@ const Login = () => {
 						</button>
 					</div>
 				</form>
+				<div style={{display:'none'}}>
+					<button className="btn btn-block btn-sm mt-3 text-black bg-white rounded-lg shadow-md hover:bg-grey-700 focus:outline-none ">
+						<img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5 mr-2" />
+							{
+							loading ? (
+								<span className='loading loading-spinner'></span>
+							) : (
+								"Login with Google"
+							)
+						}
+					</button>
+				</div>
       </div>
     </div>
   )
