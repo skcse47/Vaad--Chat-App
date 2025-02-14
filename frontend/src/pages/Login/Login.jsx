@@ -12,13 +12,17 @@ const Login = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
-	const {loading, doLogin} = useLogin();
+	const {loading, doLogin, doGoogleLogin} = useLogin();
 
 	const handleSubmit = async(e) => {
 		e.preventDefault();
 		await doLogin({username, password});
 		console.log(username, password)
 
+	}
+	const handleGoogleLogin = async (e) => {
+		e.preventDefault();
+		await doGoogleLogin();
 	}
   return (
     <div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
@@ -70,8 +74,8 @@ const Login = () => {
 						</button>
 					</div>
 				</form>
-				<div style={{display:'none'}}>
-					<button className="btn btn-block btn-sm mt-3 text-black bg-white rounded-lg shadow-md hover:bg-grey-700 focus:outline-none ">
+				<div style={{display:'block'}}>
+					<button onClick={handleGoogleLogin} className="btn btn-block btn-sm mt-3 text-black bg-white rounded-lg shadow-md hover:bg-grey-700 focus:outline-none ">
 						<img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5 mr-2" />
 							{
 							loading ? (

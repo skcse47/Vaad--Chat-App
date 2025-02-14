@@ -32,7 +32,22 @@ const useLogin = ()=>{
             setLoading(false)
         }
     }
-    return {loading, doLogin};
+
+    const doGoogleLogin = async () => {
+        // setLoading(true);
+        try {
+            // const googleRes = await fetch("/api/auth/google/callback", {
+            //     method: 'GET',
+            //     headers: {"content-type": "application/json"}
+            // });
+            // const datag = await googleRes.json();
+            // console.log(datag)
+            window.location.href = "/api/auth/google";
+        } catch (error) {
+            
+        }
+    }
+    return {loading, doLogin, doGoogleLogin};
 }
 
 export default useLogin;

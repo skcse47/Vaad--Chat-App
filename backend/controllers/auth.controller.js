@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import generateTokenAndSetCookie from "../utils/generateToken.js";
+import passport from "passport";
 
 
 export const signup = async (req, res) => {
@@ -33,11 +34,8 @@ export const signup = async (req, res) => {
         });
 
         if(newuser){
-
-
-        generateTokenAndSetCookie(newuser._id, res);
-        await newuser.save();
-
+            generateTokenAndSetCookie(newuser._id, res);
+            await newuser.save();
             res.status(201).json({
                 _id: newuser._id,
                 fullname: newuser.fullname,
@@ -58,7 +56,6 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const {username, password} = req.body;
-console.log(username)
         const user = await User.findOne({ username });
         const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
@@ -86,5 +83,13 @@ export const logout = async (req, res) => {
         res.status(200).json({message:"Logout successfull."})
     } catch (error) {
         res.status(500).json({error: "Internal Server Error"});
+    }
+}
+
+export const googleLogin = async (req, res) => {
+    passport.authenticate("google", { failureRedirect: "/login" }),
+    (req, res) => {
+        generateTokenAndSetCookie(req.user._id, res);
+        // res.redirect("/dashboard");
     }
 }
