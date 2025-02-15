@@ -2,7 +2,8 @@ import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import generateTokenAndSetCookie from "../utils/generateToken.js";
 import passport from "passport";
-
+import dotenv from "dotenv";
+dotenv.config();
 
 export const signup = async (req, res) => {
     try {
@@ -99,7 +100,7 @@ export const googleCallback = (req, res) => {
     };
 
     generateTokenAndSetCookie(req.user._id, res);
-    const redirectUrl = `http://localhost:5173/login?user=${encodeURIComponent(JSON.stringify(user))}`;
+    const redirectUrl = `${process.env.HTTP_VALUE}/login?user=${encodeURIComponent(JSON.stringify(user))}`;
     res.redirect(redirectUrl);
 };
 

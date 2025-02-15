@@ -34,7 +34,7 @@ const useLogin = ()=>{
     }
 
     const doGoogleLogin = () => {
-        location.href = "http://localhost:5000/api/auth/google";
+        location.href = `${process.env.REACT_APP_HTTP_VALUE}/api/auth/google`;
     }; 
     return {loading, doLogin, doGoogleLogin};
 }
@@ -42,7 +42,6 @@ const useGoogleAuth = () => {
     const { setAuthUser } = useAuthContext();
 
     useEffect(() => {
-        console.log("Current URL:", window.location.href); 
 
         const urlParams = new URLSearchParams(window.location.search);
         const userData = urlParams.get("user");
