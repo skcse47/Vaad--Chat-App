@@ -86,10 +86,21 @@ export const logout = async (req, res) => {
     }
 }
 
-export const googleLogin = async (req, res) => {
-    passport.authenticate("google", { failureRedirect: "/login" }),
-    (req, res) => {
-        generateTokenAndSetCookie(req.user._id, res);
-        // res.redirect("/dashboard");
+export const googleCallback = (req, res) => {
+    if (!req.user) {
+        return res.status(401).json({ error: "Login failed" });
     }
-}
+    // Convert user data to a URL-safe string
+    const user = {
+        _id: req.user._id,
+        fullname: req.user.fullname,
+        username: req.user.username,
+        profilePic: req.user.profilePic,
+    };
+
+    generateTokenAndSetCookie(req.user._id, res);
+    const redirectUrl = `http://localhost:5173/login?user=${encodeURIComponent(JSON.stringify(user))}`;
+    res.redirect(redirectUrl);
+};
+
+

@@ -10,6 +10,8 @@ import getAllUsers from "./routes/user.routes.js"
 import connectToMongoDb from "./db/connectToMongoDb.js";
 import { server, app } from "./socket/socket.js";
 import path from "path";
+import passport from "./middleware/passport.js"; // Import Passport Config
+import session from "express-session";
 
 // const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,6 +21,14 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(session({ 
+    secret: process.env.JWT_SECRET_KEY, 
+    resave: false, 
+    saveUninitialized: false,
+    cookie: { secure: false }  // Secure should be true in production with HTTPS
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);

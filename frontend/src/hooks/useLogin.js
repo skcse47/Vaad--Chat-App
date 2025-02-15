@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAuthContext } from "../context/AuthContext"
 import toast from "react-hot-toast"
 
@@ -33,24 +33,38 @@ const useLogin = ()=>{
         }
     }
 
-    const doGoogleLogin = async () => {
-        // setLoading(true);
-        try {
-            // const googleRes = await fetch("/api/auth/google/callback", {
-            //     method: 'GET',
-            //     headers: {"content-type": "application/json"}
-            // });
-            // const datag = await googleRes.json();
-            // console.log(datag)
-            window.location.href = "/api/auth/google";
-        } catch (error) {
-            
-        }
-    }
+    const doGoogleLogin = () => {
+        location.href = "http://localhost:5000/api/auth/google";
+    }; 
     return {loading, doLogin, doGoogleLogin};
 }
+const useGoogleAuth = () => {
+    const { setAuthUser } = useAuthContext();
 
-export default useLogin;
+    useEffect(() => {
+        console.log("Current URL:", window.location.href); 
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const userData = urlParams.get("user");
+
+        if (userData) {
+            try {
+                const decodedUser = JSON.parse(decodeURIComponent(userData));
+                localStorage.setItem("chat-user", JSON.stringify(decodedUser));
+                setAuthUser(decodedUser);
+
+                setTimeout(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    console.log("Query params removed from URL");
+                }, 1000);
+            } catch (error) {
+                console.error("Failed to parse user data:", error);
+            }
+        }
+    }, []);
+};   
+
+export  {useLogin, useGoogleAuth};
 
 function validateInput({username, password}){
     if(!username || !password){

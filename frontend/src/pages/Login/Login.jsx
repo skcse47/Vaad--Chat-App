@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import useLogin from '../../hooks/useLogin'
+import {useLogin,useGoogleAuth} from '../../hooks/useLogin'
+
 
 const Login = () => {
-
+	useGoogleAuth();
 	// const [inputs, setInputs] = useState({
 	// 	username: '',
 	// 	password: '',
@@ -36,7 +37,7 @@ const Login = () => {
 					<label className='label p-2'>
  							<span className='text-white label-text'>Username</span>
 					</label>
- 						<input type='text' placeholder='Enter username' className='w-full input input-bordered h-10' 
+ 						<input type='text' placeholder='Enter Username' className='w-full input input-bordered h-10' 
 						// value={inputs.username}
 						// onChange={(e) => setInputs({...inputs, username: e.target.value})}
 						value={username}
@@ -63,7 +64,7 @@ const Login = () => {
 					</Link>
 
 					<div>
-						<button className='btn btn-block btn-sm mt-6'>
+						<button className='btn btn-block btn-sm mt-8'>
 						{
 							loading ? (
 								<span className='loading loading-spinner'></span>
@@ -74,17 +75,24 @@ const Login = () => {
 						</button>
 					</div>
 				</form>
-				<div style={{display:'block'}}>
-					<button onClick={handleGoogleLogin} className="btn btn-block btn-sm mt-3 text-black bg-white rounded-lg shadow-md hover:bg-grey-700 focus:outline-none ">
-						<img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5 mr-2" />
-							{
-							loading ? (
-								<span className='loading loading-spinner'></span>
-							) : (
-								"Login with Google"
-							)
-						}
-					</button>
+				<div className="flex items-center justify-center mt-6">
+					<div className="border-t border-gray-300 flex-1"></div>
+					<span className="px-4 text-gray-500">OR</span>
+					<div className="border-t border-gray-300 flex-1"></div>
+				</div>
+				<div className="flex justify-center items-center space-x-8 mt-3 mt-6">
+				<button
+					onClick={handleGoogleLogin}
+					className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg shadow-md bg-gray-800 text-white hover:bg-gray-100 hover:text-black transition"
+					disabled={loading}
+				>
+					{loading ? <span className="loading loading-spinner"></span> : (
+						<>
+							<img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-6 h-6" />
+							<span className="font-medium">Sign in with Google</span>
+						</>
+					)}
+				</button>
 				</div>
       </div>
     </div>
