@@ -34,7 +34,7 @@ const useLogin = ()=>{
     }
 
     const doGoogleLogin = () => {
-        location.href = `${process.env.REACT_APP_HTTP_VALUE}/api/auth/google`;
+        location.href = `https://vaad-chat-app.onrender.com/api/auth/google`;
     }; 
     return {loading, doLogin, doGoogleLogin};
 }
